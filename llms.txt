@@ -1,0 +1,353 @@
+# Janitor
+
+> Janitor is a Unity package that binds UniTask work, DOTween tweens, coroutines, timers and event subscriptions to an owner called a `Lifetime`. The work stops when the owner is destroyed, deactivated, cancelled, or when its scene is disposed, and user code never writes a removal line (`-=`, `RemoveListener`, `Kill`, `StopCoroutine`, `cts.Cancel()`).
+
+Facts to know before reading further:
+
+- Package `com.ecanakli.janitor`, version 0.1.0, Unity 6000.0 or newer, C# 9. Repository: https://github.com/ecanakli/UnityJanitor (the package is at the repository root).
+- UniTask is required and must be installed first. DOTween and Zenject/Extenject are optional; their assemblies (`Ecanakli.Janitor.DOTween`, `Ecanakli.Janitor.DependencyInjection.Zenject`) compile only when the library is present (`DOTWEEN` define or a UPM DOTween; `ECANAKLI_JANITOR_DI_ZENJECT`, set by `Tools/Janitor/Zenject Integration` or by a UPM Extenject 9.0.0+).
+- Namespaces: `Ecanakli.Janitor` holds every type and extension method user code calls, including the DOTween and SignalBus extensions. `Ecanakli.Janitor.DependencyInjection` holds `LifetimeInstaller`.
+- The main type is `Lifetime`, not `Janitor`. `Cancel()` stops everything in a lifetime and its descendants and leaves it usable; `Dispose()` ends an area for good. `lifetime.Token` returns a different token after each `Cancel()`.
+- The editor window is `Window > Analysis > Janitor`. There are sixteen diagnostics, `JANITOR101` to `JANITOR116`. `JANITOR115` is routed to the error handler in every build. The other fifteen exist in the editor; those that also write a console warning do so in the editor and in development builds.
+- Lifetimes exist in Play Mode only, one tree per session. A scene lifetime that was disposed cannot be revived. In the editor, a script recompile during Play Mode discards every lifetime and the work it owned; the next call into the package starts a new session and logs one warning.
+- Every C# example in the documentation is copied from `Samples~/` or `Tests/`. Blocks marked "before" show hand-written cleanup and are not valid usage of the package.
+
+The six rules:
+
+1. Register work through a lifetime: `this.Run(...)`, `tween.AddTo(this)`, `lifetime.StartCoroutine(host, routine)`. The package only stops what was registered.
+2. Subscribe with an owner and never write a removal: `evt.Subscribe(handler, owner)`. The owner is whichever side ends first; when the source of the event is shorter-lived than the subscriber, pass the source's lifetime.
+3. Dispose scene lifetimes before loading: call `SceneLifetimes.DisposeAll()` right before a Single-mode load, or `SceneLifetimes.Dispose(scene)` right before unloading one scene. Disposal is final, so for a load that can fail, hold the scene activation and dispose right before it.
+4. Work started in `OnEnable` uses the active lifetime: `this.GetActiveLifetime()`, which is cancelled on `SetActive(false)`. On the component's own lifetime the work is added again by every activation (`JANITOR116` in the editor).
+5. Register root Sequences only, never a tween nested in a Sequence.
+6. Main thread only: registering from another thread throws; `Cancel()` and `Dispose()` from another thread are deferred to the main thread.
+
+## Which lifetime
+
+- `this.GetLifetime()` (a `MonoBehaviour`): ends when the component is destroyed. For work started in `Awake`, `Start` or a method call. `this.Run(...)`, `this.After(...)`, `this.Every(...)`, `this.OnCancel(...)`, `x.AddTo(this)` and `evt.Subscribe(handler, this)` use it.
+- `this.GetActiveLifetime()` (any component): cancelled every time the GameObject is deactivated, usable again on the next activation, disposed on destroy. For work started in `OnEnable`. It follows the GameObject, not the `enabled` flag of a component.
+- `gameObject.GetLifetime()`: ends when the GameObject is destroyed.
+- `SceneLifetimes.Get(scene)`: the default parent of the lifetimes of the objects in that scene. Ended by the scene call (rule 3).
+- `Lifetime.App`: the root. It ends with the Play Mode session.
+- `lifetime.CreateChild("Name")`: an area of your own under any of the above. Keep it in a field; `Cancel()` it to stop what it holds, `Dispose()` it when it is no longer needed.
+- With Zenject, a `Lifetime` constructor or `[Inject]` parameter: a `MonoBehaviour` receives its component lifetime, any other class a new area under the lifetime of its context.
+
+## The API
+
+Caller-information parameters are left out: every method that registers work, subscribes or creates an area ends with `[CallerMemberName] string member = null, [CallerLineNumber] int line = 0`, which the compiler fills in. Never pass them. The complete list with every overload is in the API reference (linked under Reference).
+
+Lifetimes and handles:
+
+<!-- signature -->
+```csharp
+// Lifetime: public sealed class, IDisposable, no public constructor
+public static Lifetime App { get; }
+public string Name { get; }
+public bool IsDisposed { get; }
+public CancellationToken Token { get; }
+public Lifetime CreateChild(string name = null);
+public void Cancel();
+public void Dispose();
+public LifetimeRegistration OnCancel(Action action);
+public LifetimeRegistration OnCancel<TState>(TState state, Action<TState> action) where TState : class;
+public LifetimeRegistration OnCancel<TState>(TState state, Action<TState> action, Func<TState, bool> isFinished) where TState : class;
+public LifetimeRegistration OnCancel<T1, T2>(T1 first, T2 second, Action<T1, T2> action) where T1 : class where T2 : class;
+
+// LifetimeRegistration: public readonly struct, the handle to one registered item
+public bool IsActive { get; }
+public void Cancel();
+
+// LifetimeComponentExtensions
+public static Lifetime GetLifetime(this MonoBehaviour behaviour);
+public static Lifetime GetLifetime(this MonoBehaviour behaviour, Lifetime parent);
+public static Lifetime GetLifetime(this GameObject gameObject);
+public static Lifetime GetActiveLifetime(this Component component);
+public static Lifetime GetActiveLifetime(this Component component, Lifetime parent);
+
+// SceneLifetimes: public static class
+public static Lifetime Get(Scene scene);
+public static void Dispose(Scene scene);
+public static void DisposeAll();
+```
+
+Tasks, timers and coroutines. All six task methods also exist with `this MonoBehaviour behaviour` as the receiver, where they use the component lifetime. They return nothing.
+
+<!-- signature -->
+```csharp
+// LifetimeTaskExtensions
+public static void Run(this Lifetime lifetime, Func<CancellationToken, UniTask> work);
+public static void Run<TState>(this Lifetime lifetime, TState state, Func<TState, CancellationToken, UniTask> work);
+public static void After(this Lifetime lifetime, float seconds, Action action, bool ignoreTimeScale = false);
+public static void After<TState>(this Lifetime lifetime, float seconds, TState state, Action<TState> action, bool ignoreTimeScale = false);
+public static void Every(this Lifetime lifetime, float seconds, Action action, bool ignoreTimeScale = false);
+public static void Every<TState>(this Lifetime lifetime, float seconds, TState state, Action<TState> action, bool ignoreTimeScale = false);
+
+// LifetimeCoroutineExtensions: the receiver is a lifetime, the host is passed, usually this
+public static LifetimeRegistration StartCoroutine(this Lifetime lifetime, MonoBehaviour host, IEnumerator routine);
+```
+
+Events. `OwnedEvent` is the event a class declares itself; it exists with zero to three type arguments, and `IOwnedEvent` is its subscribe-only view. The raise method is `Invoke`.
+
+<!-- signature -->
+```csharp
+// OwnedEvent: public sealed class, implements IOwnedEvent
+public OwnedEvent(string name = null);
+public int SubscriberCount { get; }
+public LifetimeRegistration Subscribe(Action handler, Lifetime owner);
+public LifetimeRegistration Subscribe(Action handler, Component owner);
+public void Invoke();
+
+// OwnedEvent<T>: implements IOwnedEvent<T>, same constructor and SubscriberCount; OwnedEvent<T1, T2> and OwnedEvent<T1, T2, T3> follow the same shape
+public LifetimeRegistration Subscribe(Action<T> handler, Lifetime owner);
+public LifetimeRegistration Subscribe(Action<T> handler, Component owner);
+public void Invoke(T arg);
+
+// IOwnedEvent and IOwnedEvent<T>: one method each; the same for two and three type arguments
+LifetimeRegistration Subscribe(Action handler, Lifetime owner);
+LifetimeRegistration Subscribe(Action<T> handler, Lifetime owner);
+
+// OwnedEventViewExtensions: a component as the owner on a view; the same for two and three type arguments
+public static LifetimeRegistration Subscribe(this IOwnedEvent view, Action handler, Component owner);
+public static LifetimeRegistration Subscribe<T>(this IOwnedEvent<T> view, Action<T> handler, Component owner);
+```
+
+Subscriptions to events the game does not own, `UnityEvent` listeners and disposables. Every paired `Subscribe` also exists with `this MonoBehaviour owner` as the receiver, and the four `OnCancel` forms exist with `this MonoBehaviour behaviour`.
+
+<!-- signature -->
+```csharp
+// LifetimeSubscriptionExtensions: the paired form; the type argument must be written out
+public static LifetimeRegistration Subscribe(this Lifetime owner, Action<Action> add, Action<Action> remove, Action handler);
+public static LifetimeRegistration Subscribe<T>(this Lifetime owner, Action<Action<T>> add, Action<Action<T>> remove, Action<T> handler);
+public static LifetimeRegistration Subscribe<T1, T2>(this Lifetime owner, Action<Action<T1, T2>> add, Action<Action<T1, T2>> remove, Action<T1, T2> handler);
+public static LifetimeRegistration Subscribe<T1, T2, T3>(this Lifetime owner, Action<Action<T1, T2, T3>> add, Action<Action<T1, T2, T3>> remove, Action<T1, T2, T3> handler);
+public static LifetimeRegistration Subscribe<TDelegate>(this Lifetime owner, Action<TDelegate> add, Action<TDelegate> remove, TDelegate handler) where TDelegate : Delegate;
+
+// LifetimeSubscriptionExtensions: UnityEvent, also for UnityEvent<T0> up to four type arguments
+public static LifetimeRegistration Subscribe(this UnityEvent evt, UnityAction handler, Lifetime owner);
+public static LifetimeRegistration Subscribe(this UnityEvent evt, UnityAction handler, Component owner);
+
+// LifetimeSubscriptionExtensions: any IDisposable
+public static LifetimeRegistration AddTo<T>(this T disposable, Lifetime lifetime) where T : IDisposable;
+public static LifetimeRegistration AddTo<T>(this T disposable, Component owner) where T : IDisposable;
+public static LifetimeRegistration AddTo<T>(this T disposable, GameObject owner) where T : IDisposable;
+```
+
+Errors and diagnostics:
+
+<!-- signature -->
+```csharp
+// LifetimeErrors: public static class
+public static LifetimeErrorHandler Handler { get; set; }
+public delegate void LifetimeErrorHandler(Exception exception, in LifetimeErrorContext context);
+
+// LifetimeErrorContext: public readonly struct
+public LifetimeErrorSource Source { get; }
+public UnityEngine.Object Owner { get; }
+public string LifetimeName { get; }
+public string Member { get; }
+public int Line { get; }
+
+public enum LifetimeErrorSource { Task, Timer, CancelAction, Coroutine, TokenCallback, EventHandler }
+// LifetimeWorkException: public sealed class, what the default handler logs
+public LifetimeErrorContext Context { get; }
+
+// LifetimeDiagnostics: editor only, the call is compiled out of player builds
+public static void Report(Lifetime lifetime, string diagnosticId, string message, UnityEngine.Object context = null);
+```
+
+DOTween (assembly `Ecanakli.Janitor.DOTween`) and Zenject (assembly `Ecanakli.Janitor.DependencyInjection.Zenject`):
+
+<!-- signature -->
+```csharp
+public enum TweenCancelMode { Kill, Complete }
+// LifetimeTweenExtensions: AddTo returns the same tween
+public static T AddTo<T>(this T tween, Lifetime owner, TweenCancelMode onCancel = TweenCancelMode.Kill) where T : Tween;
+public static T AddTo<T>(this T tween, Component owner, TweenCancelMode onCancel = TweenCancelMode.Kill) where T : Tween;
+public static T AddTo<T>(this T tween, GameObject owner, TweenCancelMode onCancel = TweenCancelMode.Kill) where T : Tween;
+public static UniTask AwaitCompletionAsync(this Tween tween, Lifetime lifetime);
+public static UniTask AwaitCompletionAsync(this Tween tween, CancellationToken token);
+
+// LifetimeInstaller, in namespace Ecanakli.Janitor.DependencyInjection: call it in an installer of every context
+public static void Install(DiContainer container);
+
+// LifetimeSignalBusExtensions, in namespace Ecanakli.Janitor: the type argument must be written out
+public static LifetimeRegistration Subscribe<TSignal>(this SignalBus bus, Action<TSignal> handler, Lifetime owner);
+public static LifetimeRegistration Subscribe<TSignal>(this SignalBus bus, Action handler, Lifetime owner);
+public static LifetimeRegistration Subscribe<TSignal>(this SignalBus bus, Action<TSignal> handler, Component owner);
+public static LifetimeRegistration Subscribe<TSignal>(this SignalBus bus, Action handler, Component owner);
+```
+
+## The restart pattern
+
+To run something again and stop the run before it, keep an area in a field, call `Cancel()` on it and register again. There is no shorter form and no handle from `Run`. When the work only has to stop with its object, create the area in `Awake` under the component lifetime (`_run = this.GetLifetime().CreateChild("Run");` in the `Countdown` sample). When the work also has to stop on `SetActive(false)`, the area hangs under the active lifetime. A complete class: hiding the panel stops the spinner, both listeners and the load; `Refresh` restarts only the load.
+
+<!-- source: Samples~/BasicUsage/InboxPanel.cs -->
+```csharp
+using System.Collections;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Ecanakli.Janitor;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Ecanakli.Janitor.Samples.BasicUsage
+{
+    /// <summary>An inbox panel: hiding it stops everything, and Refresh restarts only the load.</summary>
+    public sealed class InboxPanel : MonoBehaviour
+    {
+        private InboxService _inbox;
+        private Button _refreshButton;
+        private Graphic _spinner;
+        private TMP_Text _unreadLabel;
+        private TMP_Text _statusLabel;
+        private Lifetime _load;
+
+        // Arrives here instead of [Inject] and the Inspector; call it before the object is enabled.
+        public void Initialize(InboxService inbox, Button refreshButton, Graphic spinner, TMP_Text unreadLabel, TMP_Text statusLabel)
+        {
+            _inbox = inbox;
+            _refreshButton = refreshButton;
+            _spinner = spinner;
+            _unreadLabel = unreadLabel;
+            _statusLabel = statusLabel;
+        }
+
+        private void OnEnable()
+        {
+            // Cancelled by SetActive(false); disposed on destroy.
+            var shown = this.GetActiveLifetime();
+
+            // An area under the active lifetime: SetActive(false) cancels it, so it is kept and reused.
+            _load ??= shown.CreateChild("Load");
+
+            OnUnreadChanged(_inbox.Unread);
+            shown.StartCoroutine(this, Spin());
+            _refreshButton.onClick.Subscribe(Refresh, shown);
+            _inbox.UnreadChanged.Subscribe(OnUnreadChanged, shown);
+            _load.Run(LoadAsync);
+        }
+
+        // The running load stops here; the spinner and the listeners stay.
+        private void Refresh()
+        {
+            _load.Cancel();
+            _load.Run(LoadAsync);
+        }
+
+        private async UniTask LoadAsync(CancellationToken ct)
+        {
+            _statusLabel.text = "Loading...";
+            var messages = await _inbox.FetchAsync(ct);
+            _statusLabel.text = $"{messages.Count} message(s)";
+        }
+
+        private IEnumerator Spin()
+        {
+            while (true)
+            {
+                _spinner.rectTransform.Rotate(0f, 0f, -360f * Time.deltaTime);
+                yield return null;
+            }
+        }
+
+        private void OnUnreadChanged(int unread) => _unreadLabel.text = $"Unread: {unread}";
+    }
+}
+```
+
+- An area created with `CreateChild` under an active lifetime is cancelled, not disposed, by `SetActive(false)`. Keep it in a field and use it again after the next activation.
+- `CreateChild` on an active lifetime is allowed while the GameObject is inactive, also before it was ever active, and logs nothing. Only registrations (`Run`, `After`, `Every`, `OnCancel`, subscriptions, tweens, coroutines) are refused while it is inactive, with `JANITOR108`.
+- `Awake` does not run before the first activation, so a field assigned in `Awake` is still unset when a public method is called on an object that was never active. Create the area where it is needed (`_load ??= ...`).
+
+## Things that surprise
+
+- `Run`, `After` and `Every` return nothing. To stop one task or timer alone, give it its own area and cancel the area.
+- There is no call that cancels and runs again. Write `area.Cancel()` and then the registration, as above.
+- `Cancel()` removes the subscriptions the lifetime owns, together with everything else in it. Keep restartable work in its own area so that a restart does not remove listeners.
+- `Dispose()` is ignored (`JANITOR107`) on the lifetimes the package creates for an owner: `Lifetime.App`, scene, component, GameObject and active lifetimes. Use `Cancel()` on those; `Dispose()` is for areas made with `CreateChild`.
+- The first access decides the parent. `GetLifetime(parent)` and `GetActiveLifetime(parent)` must be the first call that touches that lifetime; a later call with another parent returns the existing lifetime unchanged (`JANITOR113`).
+- Never keep `Token` in a field. After a `Cancel()` the old token stays cancelled and the property returns a new one. Take the token that `Run` passes to the work.
+- The type argument must be written on the paired form (`this.Subscribe<string>(add, remove, handler)`) and on `signalBus.Subscribe<TSignal>(handler, owner)`. Without it the paired form fails with `CS0029` on the two lambdas.
+- `LifetimeErrors.Handler` is reset to the default at the start of every Play Mode session, so install your handler in every session. The getter never returns `null`; read it before assigning to keep the default, which logs to the console.
+- An exception in a `UnityEvent` handler is not caught or routed by the package. A cancellation is never routed.
+- Re-enabling a component (`enabled = false`, then `true`) while its GameObject stays active runs `OnEnable` again, and the active lifetime was not cancelled in between: work registered there is registered a second time. `JANITOR116` does not report this case.
+- `Awake` and `OnEnable` do not run on an object that was never active, and `OnEnable` runs inside `Instantiate` for a prefab that is saved active.
+- With Zenject, no bound class is constructed and no lifetime is captured while a container validates.
+- Names that do not exist: `Lifetime.Stop()` (it is `Cancel()`), `OwnedEvent.Raise` (it is `Invoke`), `LifetimeErrors.DefaultHandler`, `new Lifetime()`, `gameObject.GetLifetime(parent)`, a handle returned by `Run`, a scene-loading method on `SceneLifetimes`, and `this.StartCoroutine(routine)` as a lifetime form (write `lifetime.StartCoroutine(this, routine)`).
+
+## Diagnostic IDs
+
+Each ID has a section named after it in Troubleshooting. Constant names are those of `DiagnosticIds`.
+
+- `JANITOR101` `TaskOverrun`: a `Run`, `After` or `Every` task is still running after its generation ended (window)
+- `JANITOR102` `UnkillableTween`: a tween is still active after it was killed, most likely nested in a Sequence (window)
+- `JANITOR103` `OrphanLifetime`: the owner of a lifetime was destroyed but the lifetime is still alive (window)
+- `JANITOR104` `SceneDisposedLate`: a scene went away without the scene call (console and window)
+- `JANITOR105` `DuplicateSubscription`: a duplicate subscription was ignored (console and window)
+- `JANITOR106` `Growth`: one lifetime holds more than 256 entries or 64 live child areas (window)
+- `JANITOR107` `DisposeIgnored`: `Dispose()` was ignored on a package-owned lifetime (console and window)
+- `JANITOR108` `RegistrationOnInactiveObject`: a registration was refused because the active lifetime's GameObject is inactive (console and window)
+- `JANITOR109` `RegistrationOnDisposedScene`: a registration on a disposed scene lifetime while the scene is still loaded (console and window)
+- `JANITOR110` `CoroutineNotStarted`: the host is null, destroyed or inactive (console and window)
+- `JANITOR111` `Marshalled`: `Cancel` or `Dispose` was called off the main thread and deferred (console and window)
+- `JANITOR112` `MissingSceneInstall`: Zenject, a service received the lifetime of an outer context because its own context never called `LifetimeInstaller.Install` (console and window)
+- `JANITOR113` `ParentMismatch`: `GetLifetime(parent)` or `GetActiveLifetime(parent)` was ignored, or the parent was disposed (console and window)
+- `JANITOR114` `Rehomed`: information, a category was disposed and an object lifetime placed in it moved back under its scene (window)
+- `JANITOR115` `DepthExceeded`: an `OwnedEvent` was invoked more than 64 calls deep and the invoke was skipped (every build, as a routed error)
+- `JANITOR116` `RepeatedOnEnable`: work registered in `OnEnable` on a component or GameObject lifetime was registered again by a later activation (window)
+
+"Window" is the Janitor window, editor only. "Console" is a warning in the editor and in development builds.
+
+## Start here
+
+- [README](README.md): requirements, installation, a five minute start in six steps, the main before and after example, and the API as signatures
+- [Documentation index](Documentation~/index.md): which guide answers which question, and one sample class followed through enable, disable, cancel, destroy and scene disposal
+- [Concepts](Documentation~/Concepts.md): the lifetime tree, generations, `Cancel` versus `Dispose`, `Token` after a cancel, ordering, re-entrancy, and the table of what each kind of stop does
+
+## Guides
+
+- [Stopping work](Documentation~/Stopping-Work.md): how to stop everything, a scene, an object, an area, one item or one task, and how to cancel a previous run before starting a new one
+- [Tasks and errors](Documentation~/Tasks-and-Errors.md): `Run`, `After` and `Every`, the exception policy, `LifetimeErrors.Handler`, silent cancellation, and awaits that take no token
+- [Events](Documentation~/Events.md): `OwnedEvent`, the paired `Subscribe(add, remove, handler)`, `UnityEvent`, `IDisposable`, and why there is no removal line
+- [Organizing work](Documentation~/Organizing-Work.md): areas, restartable work that also stops on deactivation, category parents, the categories-service pattern, intent methods versus raw areas, and labels
+- [Components and scenes](Documentation~/Components-and-Scenes.md): component, GameObject and active lifetimes, never-activated objects, DontDestroyOnLoad, the scene call for a path and for a name, and loads that can fail
+- [Coroutines](Documentation~/Coroutines.md): coroutines bound to a lifetime, host rules, and how stopped coroutines are reclaimed
+- [Pooling](Documentation~/Pooling.md): `SetActive` pools and the active lifetime, and why stale handles are harmless
+
+## Integrations
+
+- [DOTween](Documentation~/DOTween.md): `tween.AddTo(owner)`, `TweenCancelMode`, `AwaitCompletionAsync`, root Sequences and recycling
+- [Zenject](Documentation~/Zenject.md): `LifetimeInstaller`, context lifetimes, injected `Lifetime`, SignalBus subscriptions and the scene disposer
+
+## Reference
+
+- [API reference](Documentation~/API-Reference.md): every public type with its namespace, its assembly and its complete member list as signatures
+- [Diagnostics](Documentation~/Diagnostics.md): a tour of the Janitor window, its settings, and the table of diagnostic IDs
+- [Troubleshooting](Documentation~/Troubleshooting.md): one section per `JANITOR1xx` ID, then one section per symptom or compiler error; the headings are listed below
+- [Threading](Documentation~/Threading.md): the main-thread contract, what throws and what is deferred
+- [Performance](Documentation~/Performance.md): what allocates and what does not, with the tests that measure it, and bounded memory
+- [Limitations](Documentation~/Limitations.md): what the package deliberately does not do, and what has not been measured
+- [FAQ](Documentation~/FAQ.md): short answers that link to the full explanation, including the names that do not exist
+- [Migration](Documentation~/Migration.md): nine recipes from hand-written cleanup to lifetimes, each with a complete before and after, and an adoption checklist
+
+The symptom sections of Troubleshooting, by heading: "My listener stopped after `Cancel()`"; "`GetLifetime(parent)` was ignored"; "CS0104: `Lifetime` is ambiguous"; "CS0029 on a paired `Subscribe`"; "Another library also has an `AddTo` for disposables"; "A tween was not killed"; "Work keeps running after a scene change"; "`Token` is different after `Cancel`"; "`AddTo` for tweens or `LifetimeInstaller` does not exist"; "Scripts were recompiled during Play Mode"; "Available in Play Mode only"; "Reading an error the package routed".
+
+## Samples
+
+- [Basic Usage](Samples~/BasicUsage/README.md): the core only: lifetimes, areas, categories, tasks, timers, coroutines, owned events, paired subscriptions, pooling, error routing and the scene call
+- [DOTween Usage](Samples~/DOTweenUsage/README.md): tweens bound to lifetimes, cancel modes, awaiting a tween and root Sequences
+- [Zenject Usage](Samples~/ZenjectUsage/README.md): injected lifetimes, a categories service, a service that starts its own work, SignalBus subscriptions, a factory-created object that disposes its lifetime, and the scene call from a ProjectContext service
+
+## Design
+
+- [Architecture](Documentation~/Design/Architecture.md): the assemblies, the core model, teardown in passes, the Unity binding, the integrations, the diagnostics path, and what changed between the design and the code
+- [ADR-001 The Janitor brand and the Lifetime type](Documentation~/Design/Decisions/ADR-001-Janitor-Brand-And-The-Lifetime-Type.md): the product name versus the type name, and collisions with other libraries
+- [ADR-002 Reusable Cancel versus terminal Dispose](Documentation~/Design/Decisions/ADR-002-Reusable-Cancel-Versus-Terminal-Dispose.md): two operations, generations, and why package-owned lifetimes ignore `Dispose`
+- [ADR-003 Tweens are not recyclable](Documentation~/Design/Decisions/ADR-003-Tweens-Are-Not-Recyclable.md): why a registered tween leaves DOTween's pool
+- [ADR-004 Opt-in scene call and no StopAll broadcast](Documentation~/Design/Decisions/ADR-004-Opt-In-Scene-Call-And-No-StopAll-Broadcast.md): why the scene call is one explicit line and why stopping is a call on the tree
+- [ADR-005 No removal lines in user code](Documentation~/Design/Decisions/ADR-005-No-Removal-Lines-In-User-Code.md): `OwnedEvent`, the paired `Subscribe`, the `UnityEvent` guard, and why `Cancel()` removes subscriptions
+
+## Optional
+
+- [Changelog](CHANGELOG.md): what each version added
+- [llms-full.txt](llms-full.txt): the README and every documentation page in reading order, then the sample READMEs, the stand-in types the samples use (`Support/`) and the changelog, in one file. Each part starts with a line `<!-- file: path -->`, and the file opens with a contents block that gives the line number of the first line of each part. A link such as `Stopping-Work.md#stop-one-task` in the text is a heading of the part with that path.

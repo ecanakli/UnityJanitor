@@ -1,0 +1,19 @@
+{
+    "name": "Ecanakli.Janitor.Samples.BasicUsage",
+    "rootNamespace": "Ecanakli.Janitor.Samples.BasicUsage",
+    "references": [
+        "Ecanakli.Janitor",
+        "UniTask",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

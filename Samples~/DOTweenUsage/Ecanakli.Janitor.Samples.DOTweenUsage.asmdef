@@ -1,0 +1,30 @@
+{
+    "name": "Ecanakli.Janitor.Samples.DOTweenUsage",
+    "rootNamespace": "Ecanakli.Janitor.Samples.DOTweenUsage",
+    "references": [
+        "Ecanakli.Janitor",
+        "Ecanakli.Janitor.DOTween",
+        "UniTask",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "DOTween.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "DOTWEEN || ECANAKLI_JANITOR_DOTWEEN"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.demigiant.dotween",
+            "expression": "",
+            "define": "ECANAKLI_JANITOR_DOTWEEN"
+        }
+    ],
+    "noEngineReferences": false
+}

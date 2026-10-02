@@ -1,0 +1,46 @@
+{
+  "name": "com.ecanakli.janitor",
+  "version": "0.1.0",
+  "displayName": "Janitor",
+  "description": "Cleans up Tasks, Tweens, Coroutines & Events. UniTask work, DOTween tweens, coroutines, timers and event subscriptions are bound to an owner lifetime and stop when it is destroyed, disabled, cancelled or its scene unloads. Nothing outlives its owner.",
+  "unity": "6000.0",
+  "keywords": [
+    "janitor",
+    "lifetime",
+    "cleanup",
+    "cancellation",
+    "unitask",
+    "dotween",
+    "coroutine",
+    "events"
+  ],
+  "author": {
+    "name": "Emre Canakli",
+    "url": "https://github.com/ecanakli"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecanakli/UnityJanitor.git"
+  },
+  "documentationUrl": "https://github.com/ecanakli/UnityJanitor/blob/main/Documentation~/index.md",
+  "changelogUrl": "https://github.com/ecanakli/UnityJanitor/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/ecanakli/UnityJanitor/blob/main/LICENSE.md",
+  "samples": [
+    {
+      "displayName": "Basic Usage",
+      "description": "Core only: lifetimes, areas, tasks, timers, coroutines, owned events and the scene call. Needs com.unity.ugui.",
+      "path": "Samples~/BasicUsage"
+    },
+    {
+      "displayName": "DOTween Usage",
+      "description": "Requires DOTween. Tweens bound to lifetimes, cancel modes and awaiting a tween.",
+      "path": "Samples~/DOTweenUsage"
+    },
+    {
+      "displayName": "Zenject Usage",
+      "description": "Requires the Zenject integration to be active. Injected lifetimes, a categories service and SignalBus subscriptions.",
+      "path": "Samples~/ZenjectUsage"
+    }
+  ]
+}

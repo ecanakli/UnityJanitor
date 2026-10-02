@@ -1,0 +1,23 @@
+{
+    "name": "Ecanakli.Janitor.PlayModeTests",
+    "rootNamespace": "Ecanakli.Janitor.Tests",
+    "references": [
+        "Ecanakli.Janitor",
+        "Ecanakli.Janitor.TestUtilities",
+        "UniTask",
+        "UnityEngine.TestRunner"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,31 @@
+{
+    "name": "Ecanakli.Janitor.Samples.ZenjectUsage",
+    "rootNamespace": "Ecanakli.Janitor.Samples.ZenjectUsage",
+    "references": [
+        "Ecanakli.Janitor",
+        "Ecanakli.Janitor.DependencyInjection.Zenject",
+        "UniTask",
+        "Zenject",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Zenject-usage.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "ECANAKLI_JANITOR_DI_ZENJECT"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.svermeulen.extenject",
+            "expression": "9.0.0",
+            "define": "ECANAKLI_JANITOR_DI_ZENJECT"
+        }
+    ],
+    "noEngineReferences": false
+}

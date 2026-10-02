@@ -1,0 +1,129 @@
+/* Janitor window. Text, background and border colors come from the editor theme variables, so light and dark both work. */
+
+.janitor-root {
+    flex-grow: 1;
+}
+
+/* Toolbar */
+.janitor-overrun {
+    min-width: 150px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.janitor-overrun > .unity-base-field__label {
+    min-width: 88px;
+    width: 88px;
+}
+
+.janitor-filter {
+    width: 200px;
+}
+
+/* Tabs below the tree */
+.janitor-tab {
+    -unity-font-style: normal;
+    border-bottom-width: 2px;
+    border-bottom-color: rgba(0, 0, 0, 0);
+}
+
+.janitor-tab--active {
+    -unity-font-style: bold;
+    border-bottom-color: var(--unity-colors-highlight-background);
+}
+
+/* One-line messages shown instead of an empty view, and the error banner */
+.janitor-empty {
+    flex-grow: 1;
+    padding: 16px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+    opacity: 0.7;
+}
+
+.janitor-error {
+    padding: 4px 8px;
+    white-space: normal;
+    background-color: rgba(200, 50, 50, 0.3);
+}
+
+/* Cells of the tree and the lists */
+.janitor-cell {
+    flex-grow: 1;
+    padding-left: 4px;
+    padding-right: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -unity-text-align: middle-left;
+}
+
+.janitor-cell--number {
+    -unity-text-align: middle-center;
+}
+
+.janitor-zero {
+    opacity: 0.4;
+}
+
+.janitor-disposed {
+    opacity: 0.55;
+    -unity-font-style: italic;
+}
+
+.janitor-orphan {
+    color: rgb(214, 124, 0);
+    -unity-font-style: bold;
+}
+
+.janitor-outlived {
+    color: rgb(214, 124, 0);
+    -unity-font-style: bold;
+}
+
+.janitor-info {
+    color: rgb(60, 140, 220);
+}
+
+.janitor-docs {
+    margin: 1px 2px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* Details pane */
+.janitor-details-top {
+    padding: 4px 6px;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--unity-colors-helpbox-border);
+}
+
+.janitor-details-header {
+    -unity-font-style: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.janitor-details-summary {
+    opacity: 0.8;
+    white-space: normal;
+}
+
+.janitor-trace-hint {
+    padding: 4px 8px;
+    white-space: normal;
+    opacity: 0.7;
+}
+
+.janitor-trace-area {
+    min-height: 40px;
+    max-height: 150px;
+    border-top-width: 1px;
+    border-top-color: var(--unity-colors-helpbox-border);
+}
+
+.janitor-trace {
+    margin: 0;
+    white-space: normal;
+}
