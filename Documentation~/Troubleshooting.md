@@ -135,7 +135,7 @@ with `AwaitCompletionAsync`, and DOTween ignored the kill. The tween is still pl
 whose owner has ended.
 
 **What triggers it.** DOTween ignores `Kill` on a tween that is inside a Sequence, and logs nothing
-when it does (Unity 6000.3). So the trigger is registering a nested tween instead of its root:
+when it does. So the trigger is registering a nested tween instead of its root:
 
 <!-- illustrative: before -->
 ```csharp
@@ -196,12 +196,12 @@ there:
 - **A component on a GameObject that was never active is destroyed on its own.** A component
   lifetime that is first used while its GameObject is inactive is bound to two signals, the
   destruction of the component and the destruction of the GameObject, and ends with whichever comes
-  first. But Unity sends no destroy signal for a component that never ran `Awake` (Unity 6000.3).
+  first. But Unity sends no destroy signal for a component that never ran `Awake`.
   If the object is never activated, only the GameObject signal is left: `Destroy(component)` alone
   ends nothing, and destroying the GameObject does. Once the object has been active, destroying the
   component ends its lifetime as usual.
 - **The first access to a component's lifetime happens inside that component's own `OnDestroy`.**
-  Unity never cancels a destroy token that is first read inside `OnDestroy` (Unity 6000.3), so a
+  Unity never cancels a destroy token that is first read inside `OnDestroy`, so a
   `this.Run(...)` or `this.GetLifetime()` written there creates a lifetime that nothing ends.
 
 The warning is recorded when two refreshes of the window, in different frames, both see the orphan,
@@ -247,7 +247,7 @@ public sealed class SceneFlow
 ```
 
 Unity raises no event before it starts destroying a scene. On a Single-mode load the order is
-`OnDisable`, `OnDestroy`, `sceneUnloaded`, `activeSceneChanged`, `sceneLoaded` (Unity 6000.3). The
+`OnDisable`, `OnDestroy`, `sceneUnloaded`, `activeSceneChanged`, `sceneLoaded`. The
 package's fallback listens to `sceneUnloaded`, which comes after every `OnDestroy`. With the Zenject
 integration the scene disposer catches it a little earlier and raises the same diagnostic.
 

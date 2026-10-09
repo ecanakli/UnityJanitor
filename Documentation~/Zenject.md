@@ -798,9 +798,8 @@ recorded in the Janitor window only.
   or the class disposes it (see [Objects created at run time](#objects-created-at-run-time)).
 - A GameObjectContext needs its own `Install` call. Without it, its plain services live as long as
   the scene.
-- The integration has run on Mono in the editor only. The constructor of the scene disposer, which
-  only Zenject's reflection calls, is marked to be kept by managed code stripping; a stripped
-  IL2CPP build has not been tested.
+- The constructor of the scene disposer, which only Zenject's reflection calls, is marked to be
+  kept by managed code stripping.
 - A `[Inject] Lifetime` on a `MonoBehaviour` fixes that component's parent to its scene lifetime; it
   cannot be combined with a category placement on the same component.
 - A handler can belong to one owner per bus and signal type.

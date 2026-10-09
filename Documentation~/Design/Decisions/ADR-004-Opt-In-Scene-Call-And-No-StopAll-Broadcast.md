@@ -13,7 +13,7 @@ to stop, and in what order does it stop?*
 ### The scene side
 
 When a scene is unloaded, or replaced by a Single-mode load, Unity destroys its objects. Two engine
-facts shape everything (both verified on Unity 6000.3):
+facts shape everything:
 
 - The order of events is `OnDisable` and `OnDestroy` for the objects, then
   `SceneManager.sceneUnloaded`, then `activeSceneChanged` and `sceneLoaded`. **No engine event is

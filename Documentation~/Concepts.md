@@ -338,8 +338,8 @@ private static readonly string[] FullOrder =
 
 When Unity destroys an object, the same passes run for the lifetimes of that object. For the
 lifetime of a component whose GameObject has been active at least once, they run at a fixed point
-between two Unity messages: `OnDisable`, then the tokens, then the items, then `OnDestroy` (verified
-on Unity 6000.3). By the time `OnDestroy` runs there is nothing left to clean. The details are in
+between two Unity messages: `OnDisable`, then the tokens, then the items, then `OnDestroy`.
+By the time `OnDestroy` runs there is nothing left to clean. The details are in
 [Components and scenes](Components-and-Scenes.md#when-the-object-is-destroyed).
 
 ---

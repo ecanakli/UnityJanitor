@@ -1,6 +1,6 @@
 {
   "name": "com.ecanakli.janitor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "displayName": "Janitor",
   "description": "Cleans up Tasks, Tweens, Coroutines & Events. UniTask work, DOTween tweens, coroutines, timers and event subscriptions are bound to an owner lifetime and stop when it is destroyed, disabled, cancelled or its scene unloads. Nothing outlives its owner.",
   "unity": "6000.0",

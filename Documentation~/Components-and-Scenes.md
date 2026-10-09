@@ -39,8 +39,7 @@ What the three have in common:
   application quits, or the editor leaves Play Mode).
 - Each is package-owned: `Cancel()` works on it, `Dispose()` is ignored
   ([JANITOR107](Troubleshooting.md#janitor107)).
-- The first call creates the lifetime. Every later call returns the same one and allocates nothing
-  (measured in the editor on Mono).
+- The first call creates the lifetime. Every later call returns the same one and allocates nothing.
 - They exist in Play Mode only and on the main thread only. Outside Play Mode, and off the main
   thread, the calls throw `InvalidOperationException`.
 - For a **destroyed** owner the calls return a lifetime that is already disposed, so a registration
@@ -268,7 +267,7 @@ So the sequence for `Destroy(gameObject)` is:
 3. `OnDestroy`. Nothing is left to clean, which is why classes that register through a lifetime need
    no `OnDestroy`.
 
-`DestroyImmediate` gives the same order. Both are verified on Unity 6000.3.
+`DestroyImmediate` gives the same order.
 
 - `Destroy(component)` disposes that component's lifetime only. The GameObject lifetime and the
   active lifetime belong to the GameObject and stay.
@@ -279,12 +278,11 @@ So the sequence for `Destroy(gameObject)` is:
   returns without an exception. `gameObject.GetLifetime()` and `GetActiveLifetime()` have to add a
   component on first use, which Unity refuses for an object that is being destroyed: called from
   the object's own `OnDestroy`, Unity logs "Can't add component to object that is being destroyed."
-  and the call returns a disposed lifetime. From `OnDisable`, or for a child, nothing is logged
-  (measured on Unity 6000.3).
+  and the call returns a disposed lifetime. From `OnDisable`, or for a child, nothing is logged.
 - **Do not start work in `OnDestroy`.** A component lifetime that is first asked for inside the
   component's own `OnDestroy` cannot be tied to a destruction that is already under way: Unity does
-  not cancel a `destroyCancellationToken` that is first read inside `OnDestroy` (verified on Unity
-  6000.3). Such a lifetime stays alive until its scene lifetime is disposed, and the Janitor window
+  not cancel a `destroyCancellationToken` that is first read inside `OnDestroy`. Such a
+  lifetime stays alive until its scene lifetime is disposed, and the Janitor window
   lists it as [JANITOR103](Troubleshooting.md#janitor103).
 
 ---
@@ -293,7 +291,7 @@ So the sequence for `Destroy(gameObject)` is:
 
 Unity treats a component whose GameObject was never active as if it had not started: it receives
 neither `Awake` nor `OnDestroy`, and its `destroyCancellationToken` is **not** cancelled when the
-object is destroyed (verified on Unity 6000.3). A lifetime bound to that token would never end.
+object is destroyed. A lifetime bound to that token would never end.
 
 The package therefore chooses how to watch the object at the moment the lifetime is first asked for:
 
@@ -439,7 +437,7 @@ The check in step 2 comes first because disposal cannot be taken back; see
 
 Unity raises no event before it starts destroying a scene. On a Single-mode load the order is
 `OnDisable`, `OnDestroy`, `sceneUnloaded`, `activeSceneChanged`, `sceneLoaded`; on
-`UnloadSceneAsync` it is `OnDisable`, `OnDestroy`, `sceneUnloaded` (both verified on Unity 6000.3).
+`UnloadSceneAsync` it is `OnDisable`, `OnDestroy`, `sceneUnloaded`.
 The first notification the package could listen to arrives after every object is gone. Stopping the
 scene's work while the scene is still whole therefore needs a call from the code that starts the
 load, placed before the load. It is one call, and it works with any loader, because it only has to

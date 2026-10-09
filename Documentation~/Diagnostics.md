@@ -167,10 +167,10 @@ Behaviour worth knowing:
   one and it still exists, **and selects its lifetime in the tree,** if that lifetime is still
   alive.
 - **The Docs button points at the installed version.** The URL carries the release tag of the
-  installed package (`v0.1.0` for this version), so the text you read matches the code you run:
+  installed package (`v0.1.1` for this version), so the text you read matches the code you run:
 
   ```text
-  https://github.com/ecanakli/UnityJanitor/blob/v0.1.0/Documentation~/Troubleshooting.md#janitor101
+  https://github.com/ecanakli/UnityJanitor/blob/v0.1.1/Documentation~/Troubleshooting.md#janitor101
   ```
 
   If the version cannot be read it falls back to the `main` branch. A custom ID has no documentation

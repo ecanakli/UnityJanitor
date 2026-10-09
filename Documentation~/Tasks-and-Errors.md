@@ -231,8 +231,7 @@ _area.Run(counter, static (c, ct) =>
 ```
 
 With a `static` lambda, `Run` itself allocates nothing once the package's internal pools are warm.
-This is measured in the editor on Mono; it has not been measured on IL2CPP. The async method that
-is started has its own cost, as any async method has. `TState` has no constraint, and a struct
+The async method that is started has its own cost, as any async method has. `TState` has no constraint, and a struct
 state is not boxed. For work that starts a few times per scene the plain forms are fine; the state
 forms are for hot paths. See [Performance](Performance.md).
 

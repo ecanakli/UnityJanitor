@@ -232,8 +232,7 @@ Every other way a use can end goes through the same action:
 - **The coin is destroyed while it flies.** The destruction ends the active lifetime, and the
   action runs as it does for a deactivation. The pool takes the coin, and `Rent` skips it later
   because it is destroyed. The `SetActive(false)`
-  the pool calls on an object that is being destroyed is accepted by Unity without an error
-  (measured on Unity 6000.3).
+  the pool calls on an object that is being destroyed is accepted by Unity without an error.
 
 The class has no `OnDisable`, no `CancellationTokenSource` and no field that has to be reset between
 uses. In the Janitor window an idle coin stays in the tree as a row with no entries.
@@ -520,8 +519,7 @@ A pool that destroys and instantiates needs nothing: destruction disposes the ob
 ### Cost
 
 - The first `GetActiveLifetime()` on a GameObject adds one hidden component and creates one
-  lifetime. Later calls find the same lifetime and allocate nothing (measured in the editor on
-  Mono; not measured on IL2CPP).
+  lifetime. Later calls find the same lifetime and allocate nothing.
 - The `Cancel()` call at deactivation allocates nothing itself. Each `Run` task or timer that is
   still pending at that moment costs one exception object on the following frame, with one throw
   and catch for a timer and two for a task, because UniTask ends a cancelled await by throwing. A

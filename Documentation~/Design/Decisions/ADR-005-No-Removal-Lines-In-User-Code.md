@@ -29,8 +29,7 @@ Three facts make that harder than it sounds.
 3. **Removal is not enough if dispatch works on a snapshot.** A C# multicast delegate and a
    `UnityEvent` both call the handlers that were subscribed when the invoke started. A handler that
    is removed during the invoke, because an earlier handler destroyed or closed its owner, still
-   runs once more in that invoke, on an owner that has ended (verified for `UnityEvent` on Unity
-   6000.3).
+   runs once more in that invoke, on an owner that has ended.
 
 ## Decision
 

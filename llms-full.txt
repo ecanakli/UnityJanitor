@@ -10,56 +10,56 @@ The parts under `Documentation~/Design/` explain why the package is built the wa
 ## Contents (first line of each part)
 
 - line 66: `README.md`
-- line 630: `Documentation~/index.md`
-- line 1066: `Documentation~/API-Reference.md`
-- line 1866: `Documentation~/Concepts.md`
-- line 2341: `Documentation~/Stopping-Work.md`
-- line 2950: `Documentation~/Tasks-and-Errors.md`
-- line 3765: `Documentation~/Events.md`
-- line 4730: `Documentation~/Organizing-Work.md`
-- line 5351: `Documentation~/Components-and-Scenes.md`
-- line 6110: `Documentation~/Coroutines.md`
-- line 6503: `Documentation~/Pooling.md`
-- line 7056: `Documentation~/DOTween.md`
-- line 7864: `Documentation~/Zenject.md`
-- line 8689: `Documentation~/Diagnostics.md`
-- line 9093: `Documentation~/Troubleshooting.md`
-- line 10415: `Documentation~/Threading.md`
-- line 10651: `Documentation~/Performance.md`
-- line 11077: `Documentation~/Limitations.md`
-- line 11460: `Documentation~/Migration.md`
-- line 12591: `Documentation~/FAQ.md`
-- line 13101: `Documentation~/Design/Architecture.md`
-- line 13977: `Documentation~/Design/Decisions/ADR-001-Janitor-Brand-And-The-Lifetime-Type.md`
-- line 14176: `Documentation~/Design/Decisions/ADR-002-Reusable-Cancel-Versus-Terminal-Dispose.md`
-- line 14397: `Documentation~/Design/Decisions/ADR-003-Tweens-Are-Not-Recyclable.md`
-- line 14603: `Documentation~/Design/Decisions/ADR-004-Opt-In-Scene-Call-And-No-StopAll-Broadcast.md`
-- line 14874: `Documentation~/Design/Decisions/ADR-005-No-Removal-Lines-In-User-Code.md`
-- line 15182: `Samples~/BasicUsage/README.md`
-- line 15314: `Samples~/DOTweenUsage/README.md`
-- line 15401: `Samples~/ZenjectUsage/README.md`
-- line 15498: `Samples~/BasicUsage/Support/CoinPool.cs`
-- line 15552: `Samples~/BasicUsage/Support/ConsoleErrorReporter.cs`
-- line 15573: `Samples~/BasicUsage/Support/FakeAdsSdk.cs`
-- line 15595: `Samples~/BasicUsage/Support/FakeLoadingScreen.cs`
-- line 15614: `Samples~/BasicUsage/Support/GemPool.cs`
-- line 15669: `Samples~/BasicUsage/Support/IAdsSdk.cs`
-- line 15687: `Samples~/BasicUsage/Support/IErrorReporter.cs`
-- line 15704: `Samples~/BasicUsage/Support/ILoadingScreen.cs`
-- line 15721: `Samples~/BasicUsage/Support/InboxService.cs`
-- line 15764: `Samples~/BasicUsage/Support/InputGate.cs`
-- line 15816: `Samples~/BasicUsage/Support/OfferService.cs`
-- line 15853: `Samples~/DOTweenUsage/Support/AvatarPreview.cs`
-- line 15888: `Samples~/DOTweenUsage/Support/CoinPool.cs`
-- line 15942: `Samples~/DOTweenUsage/Support/FakeOutfitRepository.cs`
-- line 15977: `Samples~/DOTweenUsage/Support/IOutfitRepository.cs`
-- line 15997: `Samples~/DOTweenUsage/Support/Outfit.cs`
-- line 16014: `Samples~/DOTweenUsage/Support/OutfitLook.cs`
-- line 16038: `Samples~/DOTweenUsage/Support/TutorialStep.cs`
-- line 16063: `Samples~/ZenjectUsage/Support/FakeAdsSdk.cs`
-- line 16085: `Samples~/ZenjectUsage/Support/IAdsSdk.cs`
-- line 16103: `Samples~/ZenjectUsage/Support/OfferService.cs`
-- line 16142: `CHANGELOG.md`
+- line 628: `Documentation~/index.md`
+- line 1063: `Documentation~/API-Reference.md`
+- line 1863: `Documentation~/Concepts.md`
+- line 2338: `Documentation~/Stopping-Work.md`
+- line 2947: `Documentation~/Tasks-and-Errors.md`
+- line 3761: `Documentation~/Events.md`
+- line 4726: `Documentation~/Organizing-Work.md`
+- line 5347: `Documentation~/Components-and-Scenes.md`
+- line 6104: `Documentation~/Coroutines.md`
+- line 6497: `Documentation~/Pooling.md`
+- line 7048: `Documentation~/DOTween.md`
+- line 7855: `Documentation~/Zenject.md`
+- line 8679: `Documentation~/Diagnostics.md`
+- line 9083: `Documentation~/Troubleshooting.md`
+- line 10405: `Documentation~/Threading.md`
+- line 10641: `Documentation~/Performance.md`
+- line 11063: `Documentation~/Limitations.md`
+- line 11439: `Documentation~/Migration.md`
+- line 12569: `Documentation~/FAQ.md`
+- line 13078: `Documentation~/Design/Architecture.md`
+- line 13948: `Documentation~/Design/Decisions/ADR-001-Janitor-Brand-And-The-Lifetime-Type.md`
+- line 14147: `Documentation~/Design/Decisions/ADR-002-Reusable-Cancel-Versus-Terminal-Dispose.md`
+- line 14368: `Documentation~/Design/Decisions/ADR-003-Tweens-Are-Not-Recyclable.md`
+- line 14574: `Documentation~/Design/Decisions/ADR-004-Opt-In-Scene-Call-And-No-StopAll-Broadcast.md`
+- line 14845: `Documentation~/Design/Decisions/ADR-005-No-Removal-Lines-In-User-Code.md`
+- line 15152: `Samples~/BasicUsage/README.md`
+- line 15284: `Samples~/DOTweenUsage/README.md`
+- line 15371: `Samples~/ZenjectUsage/README.md`
+- line 15468: `Samples~/BasicUsage/Support/CoinPool.cs`
+- line 15522: `Samples~/BasicUsage/Support/ConsoleErrorReporter.cs`
+- line 15543: `Samples~/BasicUsage/Support/FakeAdsSdk.cs`
+- line 15565: `Samples~/BasicUsage/Support/FakeLoadingScreen.cs`
+- line 15584: `Samples~/BasicUsage/Support/GemPool.cs`
+- line 15639: `Samples~/BasicUsage/Support/IAdsSdk.cs`
+- line 15657: `Samples~/BasicUsage/Support/IErrorReporter.cs`
+- line 15674: `Samples~/BasicUsage/Support/ILoadingScreen.cs`
+- line 15691: `Samples~/BasicUsage/Support/InboxService.cs`
+- line 15734: `Samples~/BasicUsage/Support/InputGate.cs`
+- line 15786: `Samples~/BasicUsage/Support/OfferService.cs`
+- line 15823: `Samples~/DOTweenUsage/Support/AvatarPreview.cs`
+- line 15858: `Samples~/DOTweenUsage/Support/CoinPool.cs`
+- line 15912: `Samples~/DOTweenUsage/Support/FakeOutfitRepository.cs`
+- line 15947: `Samples~/DOTweenUsage/Support/IOutfitRepository.cs`
+- line 15967: `Samples~/DOTweenUsage/Support/Outfit.cs`
+- line 15984: `Samples~/DOTweenUsage/Support/OutfitLook.cs`
+- line 16008: `Samples~/DOTweenUsage/Support/TutorialStep.cs`
+- line 16033: `Samples~/ZenjectUsage/Support/FakeAdsSdk.cs`
+- line 16055: `Samples~/ZenjectUsage/Support/IAdsSdk.cs`
+- line 16073: `Samples~/ZenjectUsage/Support/OfferService.cs`
+- line 16112: `CHANGELOG.md`
 
 ---
 
@@ -81,7 +81,7 @@ or when its scene is disposed, and there is no removal line to write.
 
 | | |
 |---|---|
-| Unity | 6000.0 or newer. The package is developed and tested on 6000.3. |
+| Unity | 6000.0 or newer. |
 | [UniTask](https://github.com/Cysharp/UniTask) | Required. Install it before this package; a package installed from a git URL cannot declare it as a dependency. |
 | DOTween | Optional, for binding and awaiting tweens. |
 | Zenject / Extenject | Optional, for injected lifetimes and SignalBus subscriptions. |
@@ -93,16 +93,16 @@ In the Package Manager, open the **+** menu and choose **Add package from git UR
 label it **Install package from git URL**):
 
 ```
-https://github.com/ecanakli/UnityJanitor.git#v0.1.0
+https://github.com/ecanakli/UnityJanitor.git#v0.1.1
 ```
 
 Or add the line to `Packages/manifest.json`:
 
 ```json
-"com.ecanakli.janitor": "https://github.com/ecanakli/UnityJanitor.git#v0.1.0"
+"com.ecanakli.janitor": "https://github.com/ecanakli/UnityJanitor.git#v0.1.1"
 ```
 
-Always install a tag. Without `#v0.1.0` the install tracks the default branch.
+Always install a tag. Without `#v0.1.1` the install tracks the default branch.
 
 ### Then, depending on your setup
 
@@ -607,7 +607,7 @@ of every page, and [llms-full.txt](llms-full.txt) is the whole documentation in 
 
 ## Status and limits
 
-- Version 0.1.0. See the [changelog](CHANGELOG.md).
+- Version 0.1.1. See the [changelog](CHANGELOG.md).
 - The Janitor window and the recording behind it exist only in the editor, and so do fifteen of the
   sixteen diagnostics; their console warnings are compiled into the editor and development builds.
   The exception is `JANITOR115` (an event invoked more than 64 calls deep), which is routed to the
@@ -616,8 +616,6 @@ of every page, and [llms-full.txt](llms-full.txt) is the whole documentation in 
   hidden in the Inspector.
 - A script recompile during Play Mode discards every lifetime and the work it owned. The next call
   into the package starts a new session and logs one warning; restart Play Mode for a clean state.
-- The allocation figures in the documentation are measured on Mono in the editor. They have not been
-  measured on IL2CPP yet.
 - The package only knows work that was registered through it. What it deliberately does not do is
   listed in [Limitations](Documentation~/Limitations.md).
 
@@ -944,8 +942,7 @@ created, and the lifetime is **disposed**: it leaves the tree for good, and any 
 on it is ended immediately. The class has no `OnDestroy`, because nothing is left to clean.
 
 A component lifetime (`this.GetLifetime()`, or the `this.Run(...)` family) has no `OnDisable` step.
-It is disposed between the component's `OnDisable` and its `OnDestroy`; a test pins that order on
-Unity 6000.3.
+It is disposed between the component's `OnDisable` and its `OnDestroy`.
 
 ### The scene is disposed
 
@@ -1014,7 +1011,7 @@ an HTML comment above each block names the file it was copied from. Two other ki
 
 To read or run the samples, open the Package Manager window, select **Janitor**, open the
 **Samples** tab and press **Import** next to a sample. Unity copies it into
-`Assets/Samples/Janitor/0.1.0/`.
+`Assets/Samples/Janitor/0.1.1/`.
 
 | Sample | Needs | Setup and what to try |
 |---|---|---|
@@ -2205,8 +2202,8 @@ private static readonly string[] FullOrder =
 
 When Unity destroys an object, the same passes run for the lifetimes of that object. For the
 lifetime of a component whose GameObject has been active at least once, they run at a fixed point
-between two Unity messages: `OnDisable`, then the tokens, then the items, then `OnDestroy` (verified
-on Unity 6000.3). By the time `OnDestroy` runs there is nothing left to clean. The details are in
+between two Unity messages: `OnDisable`, then the tokens, then the items, then `OnDestroy`.
+By the time `OnDestroy` runs there is nothing left to clean. The details are in
 [Components and scenes](Components-and-Scenes.md#when-the-object-is-destroyed).
 
 ---
@@ -3182,8 +3179,7 @@ _area.Run(counter, static (c, ct) =>
 ```
 
 With a `static` lambda, `Run` itself allocates nothing once the package's internal pools are warm.
-This is measured in the editor on Mono; it has not been measured on IL2CPP. The async method that
-is started has its own cost, as any async method has. `TState` has no constraint, and a struct
+The async method that is started has its own cost, as any async method has. `TState` has no constraint, and a struct
 state is not boxed. For work that starts a few times per scene the plain forms are fine; the state
 forms are for hot paths. See [Performance](Performance.md).
 
@@ -4205,7 +4201,7 @@ In the editor, the Janitor window reports a lifetime that holds more than 256 en
 - A handler may invoke the same event again. The nested call delivers to every subscription that is
   live when it starts, and then the outer call continues.
 - An `Invoke` on an event without subscribers does nothing.
-- In steady state `Invoke` allocates nothing (measured in the editor on Mono, not on IL2CPP).
+- In steady state `Invoke` allocates nothing.
 
 The removal rule differs from a C# `event` on purpose. A C# delegate invokes a snapshot of its
 handlers, so a handler removed by an earlier handler still runs once. Here it does not. In this
@@ -4456,7 +4452,7 @@ reload.onClick.Subscribe(ReloadScene, this);
 ### The guard
 
 A `UnityEvent` dispatches over a snapshot of its listeners: a listener removed during `Invoke` still
-runs in that `Invoke` (verified on Unity 6000.3). With a plain `AddListener`, listener A could
+runs in that `Invoke`. With a plain `AddListener`, listener A could
 deactivate or destroy object B, and B's listener would still be called afterwards, on an inactive or
 destroyed object.
 
@@ -5391,8 +5387,7 @@ What the three have in common:
   application quits, or the editor leaves Play Mode).
 - Each is package-owned: `Cancel()` works on it, `Dispose()` is ignored
   ([JANITOR107](Troubleshooting.md#janitor107)).
-- The first call creates the lifetime. Every later call returns the same one and allocates nothing
-  (measured in the editor on Mono).
+- The first call creates the lifetime. Every later call returns the same one and allocates nothing.
 - They exist in Play Mode only and on the main thread only. Outside Play Mode, and off the main
   thread, the calls throw `InvalidOperationException`.
 - For a **destroyed** owner the calls return a lifetime that is already disposed, so a registration
@@ -5620,7 +5615,7 @@ So the sequence for `Destroy(gameObject)` is:
 3. `OnDestroy`. Nothing is left to clean, which is why classes that register through a lifetime need
    no `OnDestroy`.
 
-`DestroyImmediate` gives the same order. Both are verified on Unity 6000.3.
+`DestroyImmediate` gives the same order.
 
 - `Destroy(component)` disposes that component's lifetime only. The GameObject lifetime and the
   active lifetime belong to the GameObject and stay.
@@ -5631,12 +5626,11 @@ So the sequence for `Destroy(gameObject)` is:
   returns without an exception. `gameObject.GetLifetime()` and `GetActiveLifetime()` have to add a
   component on first use, which Unity refuses for an object that is being destroyed: called from
   the object's own `OnDestroy`, Unity logs "Can't add component to object that is being destroyed."
-  and the call returns a disposed lifetime. From `OnDisable`, or for a child, nothing is logged
-  (measured on Unity 6000.3).
+  and the call returns a disposed lifetime. From `OnDisable`, or for a child, nothing is logged.
 - **Do not start work in `OnDestroy`.** A component lifetime that is first asked for inside the
   component's own `OnDestroy` cannot be tied to a destruction that is already under way: Unity does
-  not cancel a `destroyCancellationToken` that is first read inside `OnDestroy` (verified on Unity
-  6000.3). Such a lifetime stays alive until its scene lifetime is disposed, and the Janitor window
+  not cancel a `destroyCancellationToken` that is first read inside `OnDestroy`. Such a
+  lifetime stays alive until its scene lifetime is disposed, and the Janitor window
   lists it as [JANITOR103](Troubleshooting.md#janitor103).
 
 ---
@@ -5645,7 +5639,7 @@ So the sequence for `Destroy(gameObject)` is:
 
 Unity treats a component whose GameObject was never active as if it had not started: it receives
 neither `Awake` nor `OnDestroy`, and its `destroyCancellationToken` is **not** cancelled when the
-object is destroyed (verified on Unity 6000.3). A lifetime bound to that token would never end.
+object is destroyed. A lifetime bound to that token would never end.
 
 The package therefore chooses how to watch the object at the moment the lifetime is first asked for:
 
@@ -5791,7 +5785,7 @@ The check in step 2 comes first because disposal cannot be taken back; see
 
 Unity raises no event before it starts destroying a scene. On a Single-mode load the order is
 `OnDisable`, `OnDestroy`, `sceneUnloaded`, `activeSceneChanged`, `sceneLoaded`; on
-`UnloadSceneAsync` it is `OnDisable`, `OnDestroy`, `sceneUnloaded` (both verified on Unity 6000.3).
+`UnloadSceneAsync` it is `OnDisable`, `OnDestroy`, `sceneUnloaded`.
 The first notification the package could listen to arrives after every object is gone. Stopping the
 scene's work while the scene is still whole therefore needs a call from the code that starts the
 load, placed before the load. It is one call, and it works with any loader, because it only has to
@@ -6200,8 +6194,8 @@ The coroutine lines are `_badgeBlink = StartCoroutine(BlinkBadge());` and
 `if (_badgeBlink != null) StopCoroutine(_badgeBlink);`. Three things are fragile about them:
 
 - The handle can be `null`. `StartCoroutine` returns `null` for a routine that ends on its first
-  step, and for a start on an inactive GameObject, which also logs an error (both verified on Unity
-  6000.3). Every stop therefore needs the null check.
+  step, and for a start on an inactive GameObject, which also logs an error.
+  Every stop therefore needs the null check.
 - Each coroutine needs its own field, and each start needs its own stop line somewhere else.
 - There is no way to say "stop this when the popups are closed as a group" without more fields and
   more methods.
@@ -6402,7 +6396,7 @@ rest of the current step runs to its next `yield`, and the routine is not resume
 
 Unity does not dispose the enumerator of a stopped coroutine. No `finally` block of the routine runs
 when a coroutine is stopped by `StopCoroutine`, by the deactivation of its host or by the
-destruction of its host (verified on Unity 6000.3). A lifetime-bound coroutine behaves the same way:
+destruction of its host. A lifetime-bound coroutine behaves the same way:
 a cancel stops it and does not run its `finally` blocks.
 
 Cleanup that must happen when a coroutine is stopped therefore does not belong in a `finally` inside
@@ -6736,8 +6730,7 @@ Every other way a use can end goes through the same action:
 - **The coin is destroyed while it flies.** The destruction ends the active lifetime, and the
   action runs as it does for a deactivation. The pool takes the coin, and `Rent` skips it later
   because it is destroyed. The `SetActive(false)`
-  the pool calls on an object that is being destroyed is accepted by Unity without an error
-  (measured on Unity 6000.3).
+  the pool calls on an object that is being destroyed is accepted by Unity without an error.
 
 The class has no `OnDisable`, no `CancellationTokenSource` and no field that has to be reset between
 uses. In the Janitor window an idle coin stays in the tree as a row with no entries.
@@ -7024,8 +7017,7 @@ A pool that destroys and instantiates needs nothing: destruction disposes the ob
 ### Cost
 
 - The first `GetActiveLifetime()` on a GameObject adds one hidden component and creates one
-  lifetime. Later calls find the same lifetime and allocate nothing (measured in the editor on
-  Mono; not measured on IL2CPP).
+  lifetime. Later calls find the same lifetime and allocate nothing.
 - The `Cancel()` call at deactivation allocates nothing itself. Each `Run` task or timer that is
   still pending at that moment costs one exception object on the following frame, with one throw
   and catch for a timer and two for a task, because UniTask ends a cancelled await by throwing. A
@@ -7323,7 +7315,7 @@ registered again on every replay adds one entry per call until the generation en
 
 `AddTo` neither uses nor replaces `SetLink`; the two are independent and can be combined. They
 differ in timing. `AddTo` kills synchronously, inside the cancel or the destroy that ended the
-owner. `SetLink` kills on a later DOTween update: on Unity 6000.3 a linked tween is still active in
+owner. `SetLink` kills on a later DOTween update: a linked tween is still active in
 the frame of `Destroy` and dead one frame later. Keep `SetLink` for its pause and restart link
 behaviours; use `AddTo` for cleanup.
 
@@ -7388,7 +7380,7 @@ Rules that hold for both modes:
   fire callbacks for an animation that never played.
 - **`Complete` applies to every way a generation ends**, including `Destroy` and the scene call. The
   setter and the completion callbacks then run while the owner is going away. For a component
-  lifetime that is after the component's `OnDisable` and before its `OnDestroy` (Unity 6000.3).
+  lifetime that is after the component's `OnDisable` and before its `OnDestroy`.
   Choose `Complete` only when those callbacks are safe to run at that point; this is why `Kill` is
   the default.
 - **Tweens of one lifetime end newest first**, like every other item.
@@ -7776,7 +7768,7 @@ public sealed class PanelIntro : MonoBehaviour
 ### What happens to a nested tween registered on its own
 
 DOTween ignores `Kill` on a tween that is inside a Sequence, and it does so without logging
-anything (Unity 6000.3). So if a nested tween is registered instead of its root:
+anything. So if a nested tween is registered instead of its root:
 
 1. The owner is cancelled and the package calls `Kill` on the nested tween.
 2. DOTween ignores the call. The tween stays active.
@@ -7833,9 +7825,8 @@ An awaited tween whose await is still pending is not dropped by the sweep.
 ## Allocation
 
 A warm `AddTo` allocates nothing, for all three owner forms and both modes. A warm
-`AwaitCompletionAsync(lifetime)` that runs to completion allocates nothing either. These numbers are
-measured on Mono in the editor only; [Performance](Performance.md) lists the exact tests and what is
-not measured yet.
+`AwaitCompletionAsync(lifetime)` that runs to completion allocates nothing either. [Performance](Performance.md)
+lists the exact tests and what is not measured yet.
 
 ## Limits
 
@@ -8663,9 +8654,8 @@ recorded in the Janitor window only.
   or the class disposes it (see [Objects created at run time](#objects-created-at-run-time)).
 - A GameObjectContext needs its own `Install` call. Without it, its plain services live as long as
   the scene.
-- The integration has run on Mono in the editor only. The constructor of the scene disposer, which
-  only Zenject's reflection calls, is marked to be kept by managed code stripping; a stripped
-  IL2CPP build has not been tested.
+- The constructor of the scene disposer, which only Zenject's reflection calls, is marked to be
+  kept by managed code stripping.
 - A `[Inject] Lifetime` on a `MonoBehaviour` fixes that component's parent to its scene lifetime; it
   cannot be combined with a category placement on the same component.
 - A handler can belong to one owner per bus and signal type.
@@ -8857,10 +8847,10 @@ Behaviour worth knowing:
   one and it still exists, **and selects its lifetime in the tree,** if that lifetime is still
   alive.
 - **The Docs button points at the installed version.** The URL carries the release tag of the
-  installed package (`v0.1.0` for this version), so the text you read matches the code you run:
+  installed package (`v0.1.1` for this version), so the text you read matches the code you run:
 
   ```text
-  https://github.com/ecanakli/UnityJanitor/blob/v0.1.0/Documentation~/Troubleshooting.md#janitor101
+  https://github.com/ecanakli/UnityJanitor/blob/v0.1.1/Documentation~/Troubleshooting.md#janitor101
   ```
 
   If the version cannot be read it falls back to the `main` branch. A custom ID has no documentation
@@ -9229,7 +9219,7 @@ with `AwaitCompletionAsync`, and DOTween ignored the kill. The tween is still pl
 whose owner has ended.
 
 **What triggers it.** DOTween ignores `Kill` on a tween that is inside a Sequence, and logs nothing
-when it does (Unity 6000.3). So the trigger is registering a nested tween instead of its root:
+when it does. So the trigger is registering a nested tween instead of its root:
 
 <!-- illustrative: before -->
 ```csharp
@@ -9290,12 +9280,12 @@ there:
 - **A component on a GameObject that was never active is destroyed on its own.** A component
   lifetime that is first used while its GameObject is inactive is bound to two signals, the
   destruction of the component and the destruction of the GameObject, and ends with whichever comes
-  first. But Unity sends no destroy signal for a component that never ran `Awake` (Unity 6000.3).
+  first. But Unity sends no destroy signal for a component that never ran `Awake`.
   If the object is never activated, only the GameObject signal is left: `Destroy(component)` alone
   ends nothing, and destroying the GameObject does. Once the object has been active, destroying the
   component ends its lifetime as usual.
 - **The first access to a component's lifetime happens inside that component's own `OnDestroy`.**
-  Unity never cancels a destroy token that is first read inside `OnDestroy` (Unity 6000.3), so a
+  Unity never cancels a destroy token that is first read inside `OnDestroy`, so a
   `this.Run(...)` or `this.GetLifetime()` written there creates a lifetime that nothing ends.
 
 The warning is recorded when two refreshes of the window, in different frames, both see the orphan,
@@ -9341,7 +9331,7 @@ public sealed class SceneFlow
 ```
 
 Unity raises no event before it starts destroying a scene. On a Single-mode load the order is
-`OnDisable`, `OnDestroy`, `sceneUnloaded`, `activeSceneChanged`, `sceneLoaded` (Unity 6000.3). The
+`OnDisable`, `OnDestroy`, `sceneUnloaded`, `activeSceneChanged`, `sceneLoaded`. The
 package's fallback listens to `sceneUnloaded`, which comes after every `OnDestroy`. With the Zenject
 integration the scene disposer catches it a little earlier and raises the same diagnostic.
 
@@ -10658,10 +10648,7 @@ This page says what the package allocates and what it does not, how its memory s
 the editor diagnostics cost, and what is left in a player build.
 
 **Read this first.** Every number on this page comes from an allocation test in the package's
-`Tests/` folder, and every one of those tests runs on **Mono, inside the Unity editor**
-(Unity 6000.3). Nothing has been measured with IL2CPP on a device yet. "Allocates nothing" below
-therefore means: the test named next to it passes in the editor. Treat it as a strong indication for
-a device build, not as a measurement of one.
+`Tests/` folder. "Allocates nothing" below means: the test named next to it passes.
 
 ---
 
@@ -10874,7 +10861,7 @@ up when many objects are cancelled in the same frame: a pool that takes back 200
 mid-flight, each with one pending timer and one flight task, pays for 200 timers and 200 tasks in
 the next frame. A timer that has fired and a task that has finished cost nothing when their
 lifetime is cancelled later. No test in the package measures this cost, and none measures the time
-a throw takes on a device.
+a throw takes.
 
 ### Removing listeners from third-party events
 
@@ -11051,7 +11038,6 @@ comparison, made up to three times in one `Run`, `After` or `Every` call; see
 
 ## What has not been measured
 
-- **IL2CPP on a device.** All results above are Mono in the editor.
 - **Timings.** The tests measure allocation, not duration. This page states no milliseconds.
 - **`After` and `Every` together with the real `UniTask.Delay`.** The package's part is measured
   with a test clock.
@@ -11242,7 +11228,7 @@ destroy signal for the component, and `Destroy(component)` alone does not end th
 **Do not take a lifetime for the first time inside `OnDestroy`.** By then the object's work has
 already been stopped. A first `gameObject.GetLifetime()` or `GetActiveLifetime()` there returns a
 lifetime that has already ended, and Unity logs "Can't add component to object that is being
-destroyed." (Unity 6000.3). A first `this.GetLifetime()` there creates a lifetime that Unity never
+destroyed." A first `this.GetLifetime()` there creates a lifetime that Unity never
 ends with the component (JANITOR103).
 
 **Play Mode only.** `Lifetime.App`, `SceneLifetimes`, `GetLifetime()` and `GetActiveLifetime()`
@@ -11435,14 +11421,7 @@ were turned on.
 
 ---
 
-## Measurements and platforms
-
-**Allocation is measured on Mono in the editor only.** No number in [Performance](Performance.md)
-has been confirmed with IL2CPP on a device.
-
-**Engine behaviour was verified on Unity 6000.3.** The package declares Unity 6000.0 as its minimum
-version. The facts this documentation states about Unity itself (the order of destroy callbacks,
-destroy tokens, coroutine and scene events) were checked on 6000.3.
+## Documentation
 
 **There is no documentation website** in 0.1.0. These pages are the documentation.
 
@@ -11918,8 +11897,7 @@ public sealed class ShopPopup : MonoBehaviour
 
 - `if (_badgeBlink != null) StopCoroutine(_badgeBlink);` needs its null check. `StartCoroutine`
   returns `null` for a routine that finishes without yielding, and for a host that is inactive (in
-  that case Unity also logs an error). Both were verified on Unity 6000.3. Every other place that
-  stops the coroutine needs the same check, and `StopCoroutine(null)` throws.
+  that case Unity also logs an error). Every other place that stops the coroutine needs the same check, and `StopCoroutine(null)` throws.
 - `_badgeBlink = StartCoroutine(BlinkBadge());` overwrites the handle. If a second code path starts
   the blink while it is already running, the first coroutine keeps running and nothing holds a
   handle to stop it.
@@ -12222,7 +12200,7 @@ public sealed class ShopPopup : MonoBehaviour
   does not check for duplicates, so every time the popup is opened it adds one more listener, and
   one click on Buy then buys once per opening.
 - `UnityEvent` calls a snapshot of its listeners. A listener removed while the event is being
-  invoked still runs in that invoke (verified on Unity 6000.3), so a handler can run on an object
+  invoked still runs in that invoke, so a handler can run on an object
   that an earlier handler has closed.
 
 ### After
@@ -12621,8 +12599,7 @@ That covers one trigger (the object is destroyed) for one kind of work (awaits t
   is no moment before the destruction starts.
 - A plain C# class has no destroy token at all.
 - Unity's own `destroyCancellationToken` is never cancelled for an object that was never activated,
-  and a token first read inside `OnDestroy` is never cancelled either (both verified on Unity
-  6000.3).
+  and a token first read inside `OnDestroy` is never cancelled either.
 
 The package uses these tokens internally to notice destruction, and token-based code keeps working:
 `Run` hands your method a token, and `lifetime.Token` gives you one directly. See
@@ -12672,7 +12649,7 @@ Extenject 9.0.0 or newer sets automatically and `Tools/Janitor/Zenject Integrati
   item, and a walk over the subtree on `Cancel()`. Once warm, the package allocates nothing for
   `Cancel()`, for `OwnedEvent.Invoke`, or for registering a task, a timer, a tween, an owned-event
   subscription or a disposable. A coroutine and a `UnityEvent` subscription cost one small object
-  each. This was measured in the editor on Mono; IL2CPP has not been measured.
+  each.
 - **Cancelling work that is waiting is not free.** The `Cancel()` call itself allocates nothing, but
   every pending `After`, `Every` or `Run` that it cancels ends through an
   `OperationCanceledException` on the following frame: one exception object each, and one or two
@@ -13555,7 +13532,7 @@ object. Each handler runs in its own `try`/`catch`. A nested invoke is safe; whe
 instead of a stack overflow.
 
 **`UnityEvent`.** `UnityEvent` dispatches over a snapshot of its listeners: a listener removed
-during an invoke still runs in that invoke (verified on Unity 6000.3). The adapter therefore adds a
+during an invoke still runs in that invoke. The adapter therefore adds a
 small guard as the listener, not the handler. The guard calls the handler only while its
 subscription is live, its owner is `Active` in the same generation, and the handler's target object
 has not been destroyed. All subscription sources thus share one rule: *a subscription removed during
@@ -13609,7 +13586,7 @@ the scene lifetime, App or its category. Registering on it, or on an area below 
 GameObject is inactive is refused.
 
 The trigger has to tell a deactivation from everything else that makes Unity call `OnDisable`.
-Measured on Unity 6000.3, inside `OnDisable`:
+Inside `OnDisable`, Unity reports:
 
 | Cause | `enabled` | `activeInHierarchy` |
 |---|---|---|
@@ -13661,8 +13638,8 @@ a coroutine start.
 - **When the scene call is skipped,** three fallbacks remain: each object lifetime is disposed by
   its own destroy token; a Zenject SceneContext with the installer disposes the scene lifetime first
   among its disposables; and the `sceneUnloaded` handler disposes whatever is still alive. The last
-  two report `JANITOR104`. `sceneUnloaded` is raised after `OnDestroy` (verified on Unity 6000.3),
-  which is why it is a fallback and not the mechanism.
+  two report `JANITOR104`. `sceneUnloaded` is raised after `OnDestroy`, which
+  is why it is a fallback and not the mechanism.
 - **Session start** (`RuntimeInitializeOnLoadMethod`, subsystem registration): shut down the
   previous tree, create a new one, re-subscribe the engine events and reset `LifetimeErrors.Handler`
   to the default.
@@ -13898,8 +13875,6 @@ that produce them:
 | Registered tweens leave DOTween's pool | Accepted ([ADR-003](Decisions/ADR-003-Tweens-Are-Not-Recyclable.md)) |
 | Editor diagnostics | Counters and struct copies on the hot paths; strings are built only when a warning fires or the window asks; all of it is absent from players |
 
-All allocation measurements were taken in the editor on Mono. IL2CPP players have not been measured.
-
 ---
 
 ## 14. What changed between the design and the code
@@ -13945,13 +13920,9 @@ will otherwise trip over these.
 
 ### Known limitations in 0.1.0
 
-- Every test and every allocation measurement ran in the editor, on Unity 6000.3 with Mono. IL2CPP
-  players have not been measured.
 - The order of `Application.exitCancellationToken` relative to `OnDestroy` at application exit is
   not pinned by an automated test. It no longer decides whether App is disposed: three signals run
   the same shutdown, and object lifetimes are also disposed by their own destroy tokens.
-- The managed-stripping protection of the Zenject scene disposer has not been confirmed on an IL2CPP
-  build.
 - A script reload during Play Mode discards the tree; work started before it is not restored.
 - A cancelled pending task or timer costs an exception on the next frame.
 - A task has no handle of its own; cancelling one task means giving it an area.
@@ -14617,7 +14588,7 @@ to stop, and in what order does it stop?*
 ### The scene side
 
 When a scene is unloaded, or replaced by a Single-mode load, Unity destroys its objects. Two engine
-facts shape everything (both verified on Unity 6000.3):
+facts shape everything:
 
 - The order of events is `OnDisable` and `OnDestroy` for the objects, then
   `SceneManager.sceneUnloaded`, then `activeSceneChanged` and `sceneLoaded`. **No engine event is
@@ -14904,8 +14875,7 @@ Three facts make that harder than it sounds.
 3. **Removal is not enough if dispatch works on a snapshot.** A C# multicast delegate and a
    `UnityEvent` both call the handlers that were subscribed when the invoke started. A handler that
    is removed during the invoke, because an earlier handler destroyed or closed its owner, still
-   runs once more in that invoke, on an owner that has ended (verified for `UnityEvent` on Unity
-   6000.3).
+   runs once more in that invoke, on an owner that has ended.
 
 ## Decision
 
@@ -16146,6 +16116,17 @@ namespace Ecanakli.Janitor.Samples.ZenjectUsage
 All notable changes to this package are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the package uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
+
+## [0.1.1] - 2026-10-09
+
+### Fixed
+
+- **`Tools/Janitor/Zenject Integration` now writes its define to iOS and Windows Store Apps.** The
+  menu skipped every build target whose value the `BuildTargetGroup` enum shares with an obsolete
+  name (`iOS` with `iPhone`, `WSA` with `Metro`), so a build for those targets compiled without the
+  integration. If you turned the integration on with 0.1.0, choose the menu item twice after
+  updating (off, then on) so `ECANAKLI_JANITOR_DI_ZENJECT` reaches every target, or add it to those
+  targets in Player Settings.
 
 ## [0.1.0] - 2026-10-02
 

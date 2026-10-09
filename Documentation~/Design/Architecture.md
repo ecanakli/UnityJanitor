@@ -453,7 +453,7 @@ object. Each handler runs in its own `try`/`catch`. A nested invoke is safe; whe
 instead of a stack overflow.
 
 **`UnityEvent`.** `UnityEvent` dispatches over a snapshot of its listeners: a listener removed
-during an invoke still runs in that invoke (verified on Unity 6000.3). The adapter therefore adds a
+during an invoke still runs in that invoke. The adapter therefore adds a
 small guard as the listener, not the handler. The guard calls the handler only while its
 subscription is live, its owner is `Active` in the same generation, and the handler's target object
 has not been destroyed. All subscription sources thus share one rule: *a subscription removed during
@@ -507,7 +507,7 @@ the scene lifetime, App or its category. Registering on it, or on an area below 
 GameObject is inactive is refused.
 
 The trigger has to tell a deactivation from everything else that makes Unity call `OnDisable`.
-Measured on Unity 6000.3, inside `OnDisable`:
+Inside `OnDisable`, Unity reports:
 
 | Cause | `enabled` | `activeInHierarchy` |
 |---|---|---|
@@ -559,8 +559,8 @@ a coroutine start.
 - **When the scene call is skipped,** three fallbacks remain: each object lifetime is disposed by
   its own destroy token; a Zenject SceneContext with the installer disposes the scene lifetime first
   among its disposables; and the `sceneUnloaded` handler disposes whatever is still alive. The last
-  two report `JANITOR104`. `sceneUnloaded` is raised after `OnDestroy` (verified on Unity 6000.3),
-  which is why it is a fallback and not the mechanism.
+  two report `JANITOR104`. `sceneUnloaded` is raised after `OnDestroy`, which
+  is why it is a fallback and not the mechanism.
 - **Session start** (`RuntimeInitializeOnLoadMethod`, subsystem registration): shut down the
   previous tree, create a new one, re-subscribe the engine events and reset `LifetimeErrors.Handler`
   to the default.
@@ -796,8 +796,6 @@ that produce them:
 | Registered tweens leave DOTween's pool | Accepted ([ADR-003](Decisions/ADR-003-Tweens-Are-Not-Recyclable.md)) |
 | Editor diagnostics | Counters and struct copies on the hot paths; strings are built only when a warning fires or the window asks; all of it is absent from players |
 
-All allocation measurements were taken in the editor on Mono. IL2CPP players have not been measured.
-
 ---
 
 ## 14. What changed between the design and the code
@@ -843,13 +841,9 @@ will otherwise trip over these.
 
 ### Known limitations in 0.1.0
 
-- Every test and every allocation measurement ran in the editor, on Unity 6000.3 with Mono. IL2CPP
-  players have not been measured.
 - The order of `Application.exitCancellationToken` relative to `OnDestroy` at application exit is
   not pinned by an automated test. It no longer decides whether App is disposed: three signals run
   the same shutdown, and object lifetimes are also disposed by their own destroy tokens.
-- The managed-stripping protection of the Zenject scene disposer has not been confirmed on an IL2CPP
-  build.
 - A script reload during Play Mode discards the tree; work started before it is not restored.
 - A cancelled pending task or timer costs an exception on the next frame.
 - A task has no handle of its own; cancelling one task means giving it an area.

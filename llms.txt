@@ -4,7 +4,7 @@
 
 Facts to know before reading further:
 
-- Package `com.ecanakli.janitor`, version 0.1.0, Unity 6000.0 or newer, C# 9. Repository: https://github.com/ecanakli/UnityJanitor (the package is at the repository root).
+- Package `com.ecanakli.janitor`, version 0.1.1, Unity 6000.0 or newer, C# 9. Repository: https://github.com/ecanakli/UnityJanitor (the package is at the repository root).
 - UniTask is required and must be installed first. DOTween and Zenject/Extenject are optional; their assemblies (`Ecanakli.Janitor.DOTween`, `Ecanakli.Janitor.DependencyInjection.Zenject`) compile only when the library is present (`DOTWEEN` define or a UPM DOTween; `ECANAKLI_JANITOR_DI_ZENJECT`, set by `Tools/Janitor/Zenject Integration` or by a UPM Extenject 9.0.0+).
 - Namespaces: `Ecanakli.Janitor` holds every type and extension method user code calls, including the DOTween and SignalBus extensions. `Ecanakli.Janitor.DependencyInjection` holds `LifetimeInstaller`.
 - The main type is `Lifetime`, not `Janitor`. `Cancel()` stops everything in a lifetime and its descendants and leaves it usable; `Dispose()` ends an area for good. `lifetime.Token` returns a different token after each `Cancel()`.
@@ -326,7 +326,7 @@ Each ID has a section named after it in Troubleshooting. Constant names are thos
 - [Troubleshooting](Documentation~/Troubleshooting.md): one section per `JANITOR1xx` ID, then one section per symptom or compiler error; the headings are listed below
 - [Threading](Documentation~/Threading.md): the main-thread contract, what throws and what is deferred
 - [Performance](Documentation~/Performance.md): what allocates and what does not, with the tests that measure it, and bounded memory
-- [Limitations](Documentation~/Limitations.md): what the package deliberately does not do, and what has not been measured
+- [Limitations](Documentation~/Limitations.md): what the package deliberately does not do
 - [FAQ](Documentation~/FAQ.md): short answers that link to the full explanation, including the names that do not exist
 - [Migration](Documentation~/Migration.md): nine recipes from hand-written cleanup to lifetimes, each with a complete before and after, and an adoption checklist
 

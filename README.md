@@ -14,7 +14,7 @@ or when its scene is disposed, and there is no removal line to write.
 
 | | |
 |---|---|
-| Unity | 6000.0 or newer. The package is developed and tested on 6000.3. |
+| Unity | 6000.0 or newer. |
 | [UniTask](https://github.com/Cysharp/UniTask) | Required. Install it before this package; a package installed from a git URL cannot declare it as a dependency. |
 | DOTween | Optional, for binding and awaiting tweens. |
 | Zenject / Extenject | Optional, for injected lifetimes and SignalBus subscriptions. |
@@ -26,16 +26,16 @@ In the Package Manager, open the **+** menu and choose **Add package from git UR
 label it **Install package from git URL**):
 
 ```
-https://github.com/ecanakli/UnityJanitor.git#v0.1.0
+https://github.com/ecanakli/UnityJanitor.git#v0.1.1
 ```
 
 Or add the line to `Packages/manifest.json`:
 
 ```json
-"com.ecanakli.janitor": "https://github.com/ecanakli/UnityJanitor.git#v0.1.0"
+"com.ecanakli.janitor": "https://github.com/ecanakli/UnityJanitor.git#v0.1.1"
 ```
 
-Always install a tag. Without `#v0.1.0` the install tracks the default branch.
+Always install a tag. Without `#v0.1.1` the install tracks the default branch.
 
 ### Then, depending on your setup
 
@@ -540,7 +540,7 @@ of every page, and [llms-full.txt](llms-full.txt) is the whole documentation in 
 
 ## Status and limits
 
-- Version 0.1.0. See the [changelog](CHANGELOG.md).
+- Version 0.1.1. See the [changelog](CHANGELOG.md).
 - The Janitor window and the recording behind it exist only in the editor, and so do fifteen of the
   sixteen diagnostics; their console warnings are compiled into the editor and development builds.
   The exception is `JANITOR115` (an event invoked more than 64 calls deep), which is routed to the
@@ -549,8 +549,6 @@ of every page, and [llms-full.txt](llms-full.txt) is the whole documentation in 
   hidden in the Inspector.
 - A script recompile during Play Mode discards every lifetime and the work it owned. The next call
   into the package starts a new session and logs one warning; restart Play Mode for a clean state.
-- The allocation figures in the documentation are measured on Mono in the editor. They have not been
-  measured on IL2CPP yet.
 - The package only knows work that was registered through it. What it deliberately does not do is
   listed in [Limitations](Documentation~/Limitations.md).
 

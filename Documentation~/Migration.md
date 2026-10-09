@@ -457,8 +457,7 @@ public sealed class ShopPopup : MonoBehaviour
 
 - `if (_badgeBlink != null) StopCoroutine(_badgeBlink);` needs its null check. `StartCoroutine`
   returns `null` for a routine that finishes without yielding, and for a host that is inactive (in
-  that case Unity also logs an error). Both were verified on Unity 6000.3. Every other place that
-  stops the coroutine needs the same check, and `StopCoroutine(null)` throws.
+  that case Unity also logs an error). Every other place that stops the coroutine needs the same check, and `StopCoroutine(null)` throws.
 - `_badgeBlink = StartCoroutine(BlinkBadge());` overwrites the handle. If a second code path starts
   the blink while it is already running, the first coroutine keeps running and nothing holds a
   handle to stop it.
@@ -761,7 +760,7 @@ public sealed class ShopPopup : MonoBehaviour
   does not check for duplicates, so every time the popup is opened it adds one more listener, and
   one click on Buy then buys once per opening.
 - `UnityEvent` calls a snapshot of its listeners. A listener removed while the event is being
-  invoked still runs in that invoke (verified on Unity 6000.3), so a handler can run on an object
+  invoked still runs in that invoke, so a handler can run on an object
   that an earlier handler has closed.
 
 ### After

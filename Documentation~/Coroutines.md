@@ -89,8 +89,8 @@ The coroutine lines are `_badgeBlink = StartCoroutine(BlinkBadge());` and
 `if (_badgeBlink != null) StopCoroutine(_badgeBlink);`. Three things are fragile about them:
 
 - The handle can be `null`. `StartCoroutine` returns `null` for a routine that ends on its first
-  step, and for a start on an inactive GameObject, which also logs an error (both verified on Unity
-  6000.3). Every stop therefore needs the null check.
+  step, and for a start on an inactive GameObject, which also logs an error.
+  Every stop therefore needs the null check.
 - Each coroutine needs its own field, and each start needs its own stop line somewhere else.
 - There is no way to say "stop this when the popups are closed as a group" without more fields and
   more methods.
@@ -291,7 +291,7 @@ rest of the current step runs to its next `yield`, and the routine is not resume
 
 Unity does not dispose the enumerator of a stopped coroutine. No `finally` block of the routine runs
 when a coroutine is stopped by `StopCoroutine`, by the deactivation of its host or by the
-destruction of its host (verified on Unity 6000.3). A lifetime-bound coroutine behaves the same way:
+destruction of its host. A lifetime-bound coroutine behaves the same way:
 a cancel stops it and does not run its `finally` blocks.
 
 Cleanup that must happen when a coroutine is stopped therefore does not belong in a `finally` inside

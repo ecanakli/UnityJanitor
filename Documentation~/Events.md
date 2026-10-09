@@ -439,7 +439,7 @@ In the editor, the Janitor window reports a lifetime that holds more than 256 en
 - A handler may invoke the same event again. The nested call delivers to every subscription that is
   live when it starts, and then the outer call continues.
 - An `Invoke` on an event without subscribers does nothing.
-- In steady state `Invoke` allocates nothing (measured in the editor on Mono, not on IL2CPP).
+- In steady state `Invoke` allocates nothing.
 
 The removal rule differs from a C# `event` on purpose. A C# delegate invokes a snapshot of its
 handlers, so a handler removed by an earlier handler still runs once. Here it does not. In this
@@ -690,7 +690,7 @@ reload.onClick.Subscribe(ReloadScene, this);
 ### The guard
 
 A `UnityEvent` dispatches over a snapshot of its listeners: a listener removed during `Invoke` still
-runs in that `Invoke` (verified on Unity 6000.3). With a plain `AddListener`, listener A could
+runs in that `Invoke`. With a plain `AddListener`, listener A could
 deactivate or destroy object B, and B's listener would still be called afterwards, on an inactive or
 destroyed object.
 

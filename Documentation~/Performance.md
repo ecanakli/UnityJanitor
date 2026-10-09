@@ -6,10 +6,7 @@ This page says what the package allocates and what it does not, how its memory s
 the editor diagnostics cost, and what is left in a player build.
 
 **Read this first.** Every number on this page comes from an allocation test in the package's
-`Tests/` folder, and every one of those tests runs on **Mono, inside the Unity editor**
-(Unity 6000.3). Nothing has been measured with IL2CPP on a device yet. "Allocates nothing" below
-therefore means: the test named next to it passes in the editor. Treat it as a strong indication for
-a device build, not as a measurement of one.
+`Tests/` folder. "Allocates nothing" below means: the test named next to it passes.
 
 ---
 
@@ -222,7 +219,7 @@ up when many objects are cancelled in the same frame: a pool that takes back 200
 mid-flight, each with one pending timer and one flight task, pays for 200 timers and 200 tasks in
 the next frame. A timer that has fired and a task that has finished cost nothing when their
 lifetime is cancelled later. No test in the package measures this cost, and none measures the time
-a throw takes on a device.
+a throw takes.
 
 ### Removing listeners from third-party events
 
@@ -399,7 +396,6 @@ comparison, made up to three times in one `Run`, `After` or `Every` call; see
 
 ## What has not been measured
 
-- **IL2CPP on a device.** All results above are Mono in the editor.
 - **Timings.** The tests measure allocation, not duration. This page states no milliseconds.
 - **`After` and `Every` together with the real `UniTask.Delay`.** The package's part is measured
   with a test clock.

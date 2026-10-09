@@ -29,8 +29,7 @@ That covers one trigger (the object is destroyed) for one kind of work (awaits t
   is no moment before the destruction starts.
 - A plain C# class has no destroy token at all.
 - Unity's own `destroyCancellationToken` is never cancelled for an object that was never activated,
-  and a token first read inside `OnDestroy` is never cancelled either (both verified on Unity
-  6000.3).
+  and a token first read inside `OnDestroy` is never cancelled either.
 
 The package uses these tokens internally to notice destruction, and token-based code keeps working:
 `Run` hands your method a token, and `lifetime.Token` gives you one directly. See
@@ -80,7 +79,7 @@ Extenject 9.0.0 or newer sets automatically and `Tools/Janitor/Zenject Integrati
   item, and a walk over the subtree on `Cancel()`. Once warm, the package allocates nothing for
   `Cancel()`, for `OwnedEvent.Invoke`, or for registering a task, a timer, a tween, an owned-event
   subscription or a disposable. A coroutine and a `UnityEvent` subscription cost one small object
-  each. This was measured in the editor on Mono; IL2CPP has not been measured.
+  each.
 - **Cancelling work that is waiting is not free.** The `Cancel()` call itself allocates nothing, but
   every pending `After`, `Every` or `Run` that it cancels ends through an
   `OperationCanceledException` on the following frame: one exception object each, and one or two

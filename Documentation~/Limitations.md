@@ -164,7 +164,7 @@ destroy signal for the component, and `Destroy(component)` alone does not end th
 **Do not take a lifetime for the first time inside `OnDestroy`.** By then the object's work has
 already been stopped. A first `gameObject.GetLifetime()` or `GetActiveLifetime()` there returns a
 lifetime that has already ended, and Unity logs "Can't add component to object that is being
-destroyed." (Unity 6000.3). A first `this.GetLifetime()` there creates a lifetime that Unity never
+destroyed." A first `this.GetLifetime()` there creates a lifetime that Unity never
 ends with the component (JANITOR103).
 
 **Play Mode only.** `Lifetime.App`, `SceneLifetimes`, `GetLifetime()` and `GetActiveLifetime()`
@@ -357,14 +357,7 @@ were turned on.
 
 ---
 
-## Measurements and platforms
-
-**Allocation is measured on Mono in the editor only.** No number in [Performance](Performance.md)
-has been confirmed with IL2CPP on a device.
-
-**Engine behaviour was verified on Unity 6000.3.** The package declares Unity 6000.0 as its minimum
-version. The facts this documentation states about Unity itself (the order of destroy callbacks,
-destroy tokens, coroutine and scene events) were checked on 6000.3.
+## Documentation
 
 **There is no documentation website** in 0.1.0. These pages are the documentation.
 

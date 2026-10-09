@@ -266,7 +266,7 @@ registered again on every replay adds one entry per call until the generation en
 
 `AddTo` neither uses nor replaces `SetLink`; the two are independent and can be combined. They
 differ in timing. `AddTo` kills synchronously, inside the cancel or the destroy that ended the
-owner. `SetLink` kills on a later DOTween update: on Unity 6000.3 a linked tween is still active in
+owner. `SetLink` kills on a later DOTween update: a linked tween is still active in
 the frame of `Destroy` and dead one frame later. Keep `SetLink` for its pause and restart link
 behaviours; use `AddTo` for cleanup.
 
@@ -331,7 +331,7 @@ Rules that hold for both modes:
   fire callbacks for an animation that never played.
 - **`Complete` applies to every way a generation ends**, including `Destroy` and the scene call. The
   setter and the completion callbacks then run while the owner is going away. For a component
-  lifetime that is after the component's `OnDisable` and before its `OnDestroy` (Unity 6000.3).
+  lifetime that is after the component's `OnDisable` and before its `OnDestroy`.
   Choose `Complete` only when those callbacks are safe to run at that point; this is why `Kill` is
   the default.
 - **Tweens of one lifetime end newest first**, like every other item.
@@ -719,7 +719,7 @@ public sealed class PanelIntro : MonoBehaviour
 ### What happens to a nested tween registered on its own
 
 DOTween ignores `Kill` on a tween that is inside a Sequence, and it does so without logging
-anything (Unity 6000.3). So if a nested tween is registered instead of its root:
+anything. So if a nested tween is registered instead of its root:
 
 1. The owner is cancelled and the package calls `Kill` on the nested tween.
 2. DOTween ignores the call. The tween stays active.
@@ -776,9 +776,8 @@ An awaited tween whose await is still pending is not dropped by the sweep.
 ## Allocation
 
 A warm `AddTo` allocates nothing, for all three owner forms and both modes. A warm
-`AwaitCompletionAsync(lifetime)` that runs to completion allocates nothing either. These numbers are
-measured on Mono in the editor only; [Performance](Performance.md) lists the exact tests and what is
-not measured yet.
+`AwaitCompletionAsync(lifetime)` that runs to completion allocates nothing either. [Performance](Performance.md)
+lists the exact tests and what is not measured yet.
 
 ## Limits
 

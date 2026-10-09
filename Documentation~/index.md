@@ -313,8 +313,7 @@ created, and the lifetime is **disposed**: it leaves the tree for good, and any 
 on it is ended immediately. The class has no `OnDestroy`, because nothing is left to clean.
 
 A component lifetime (`this.GetLifetime()`, or the `this.Run(...)` family) has no `OnDisable` step.
-It is disposed between the component's `OnDisable` and its `OnDestroy`; a test pins that order on
-Unity 6000.3.
+It is disposed between the component's `OnDisable` and its `OnDestroy`.
 
 ### The scene is disposed
 
@@ -383,7 +382,7 @@ an HTML comment above each block names the file it was copied from. Two other ki
 
 To read or run the samples, open the Package Manager window, select **Janitor**, open the
 **Samples** tab and press **Import** next to a sample. Unity copies it into
-`Assets/Samples/Janitor/0.1.0/`.
+`Assets/Samples/Janitor/0.1.1/`.
 
 | Sample | Needs | Setup and what to try |
 |---|---|---|

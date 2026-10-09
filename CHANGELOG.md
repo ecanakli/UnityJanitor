@@ -4,6 +4,17 @@ All notable changes to this package are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-09
+
+### Fixed
+
+- **`Tools/Janitor/Zenject Integration` now writes its define to iOS and Windows Store Apps.** The
+  menu skipped every build target whose value the `BuildTargetGroup` enum shares with an obsolete
+  name (`iOS` with `iPhone`, `WSA` with `Metro`), so a build for those targets compiled without the
+  integration. If you turned the integration on with 0.1.0, choose the menu item twice after
+  updating (off, then on) so `ECANAKLI_JANITOR_DI_ZENJECT` reaches every target, or add it to those
+  targets in Player Settings.
+
 ## [0.1.0] - 2026-10-02
 
 ### Added
